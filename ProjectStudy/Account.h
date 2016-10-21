@@ -3,27 +3,38 @@
 
 class Account
 {
-	Employee mOwner;
+protected:
+	Employee* mOwner;
 	double mBalance;
 	double cash_in;
 	double cash_out;
 	void uploadBalance();
 public:
-	Account(Employee emp, double in, double out, double bl) :mOwner(emp), mBalance(bl), cash_in(in), cash_out(out) {};
+	Account(Employee* emp, double in, double out);
+	~Account();
 	double getBalance();
-	Employee getOwner();
+	Employee* getOwner();
 	void deposit(double value);
 	void withdrawMoney(double value);
 
-	friend std::ostream& operator<< (std::ostream &out, const Account &account);
+	friend std::ostream& operator<< (std::ostream &out,  Account &account);
 
-	Account operator+=(const double& a) {
-		this->mBalance += a;
+	Account& operator+=(const double& a) {
+		this->cash_out += a;
+		this->uploadBalance();
 		return *this;
 	}
-	Account operator-=(const double& a) {
-		this->mBalance -= a;
+	Account& operator-=(const double& a) {
+		this->cash_out -= a;
+		this->uploadBalance();
 		return *this;
+	}
+
+	bool operator<(const double& a) {
+		if (this->mBalance < a) {
+			return true;
+		}
+		return false;
 	}
 };
 

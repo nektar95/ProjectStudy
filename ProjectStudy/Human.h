@@ -7,7 +7,7 @@ class Human
 	std::string mName;
 	public:
 		Human(std::string name);
-		virtual void presentYourself() = 0;
+		virtual std::string presentYourself() = 0;
 		std::string getName();
 };
 

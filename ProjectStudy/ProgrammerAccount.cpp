@@ -12,6 +12,12 @@ void ProgrammerAccount::uploadBalance(){
 }
 
 std::ostream& operator<< (std::ostream &out, ProgrammerAccount &account) {
-	account.getOwner()->presentYourself();
-	return out << "Balance: " << account.getBalance() << "\n" << "Meal price: " << account.mMealPrice;
+	return out << 
+		account.getOwner()->presentYourself() << "\nBilans: " << account.getBalance() <<
+		"\nCena: " << account.mMealPrice <<
+		"\nWplata: " << account.cash_in <<
+		"\nReszta: " << account.cash_out;
 }
+
+
+

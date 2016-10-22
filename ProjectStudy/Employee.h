@@ -7,7 +7,7 @@ protected:
 	bool canBorrow;
 public:
 	Employee(std::string name);
-	void presentYourself();
+	std::string presentYourself();
 	bool checkLoan();
 };
 

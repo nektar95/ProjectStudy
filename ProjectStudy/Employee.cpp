@@ -8,6 +8,6 @@ bool Employee::checkLoan() {
 	return canBorrow;
 }
 
-void Employee::presentYourself() {
-	std::cout << "Employee: " << getName() << std::endl;
+std::string Employee::presentYourself() {
+	return "Pracownik: " + getName();
 }

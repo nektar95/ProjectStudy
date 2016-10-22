@@ -13,6 +13,73 @@ int main()
 {
 	bool isRunning = true;
 
+	//load data from file data.txt
+	std::ifstream file;
+	file.exceptions(std::ifstream::failbit | std::ifstream::badbit);
+	try {
+		file.open("data.txt");
+
+		std::string in;
+		while (!file.eof()) {
+			file >> in;
+			std::string name,buffor;
+			double price, cashin, cashout;
+			int period;
+			if(in=="Programista:"){
+				//name
+				file >> name;
+				
+				//balance, not used
+				file >> buffor;
+				file >> buffor;
+				
+				//price
+				file >> buffor;
+				file >> price;
+				
+				//cashin
+				file >> buffor;
+				file >> cashin;
+				
+				//cashout
+				file >> buffor;
+				file >> cashout;
+				
+				Programmer* intern = new Programmer(name);
+				ProgrammerAccount* account = new ProgrammerAccount(intern, cashin, cashout, price);
+				cash.addAccount(account, cashin - cashout);
+			}
+			if (in == "Stazysta:") {
+				//name
+				file >> name;
+				//period
+				file >> buffor;
+				file >> buffor;
+				file >> period;
+				//balance, not used
+				file >> buffor;
+				file >> buffor;
+				//price
+				file >> buffor;
+				file >> price;
+				//cashin
+				file >> buffor;
+				file >> cashin;
+				//cashout
+				file >> buffor;
+				file >> cashout;
+
+				Intern* intern = new Intern(name, period);
+				ProgrammerAccount* account = new ProgrammerAccount(intern, cashin, cashout, price);
+				cash.addAccount(account, cashin - cashout);
+			}
+			in = "";
+		}
+		file.close();
+	} catch(std::ifstream::failure& e) {
+		//std::cout << "Blad: " << e.what() << std::endl;
+	}
+
 	while (isRunning) {
 		int input;
 		std::cout << "1. Dodaj konto"<<std::endl;
@@ -64,8 +131,10 @@ int main()
 			}
 			case 6: {
 				for (int i = 0; i < cash.accountSize(); i++) {
+					std::cout << "<------------->\n" << std::endl;
 					std::cout << i + 1 << ". " << *cash.checkBalance(i) << std::endl;
 				}
+				std::cout << "<------------->\n" << std::endl;
 				break;
 			}
 			case 7: {
@@ -95,7 +164,7 @@ void newAccount() {
 			case 1:{
 				std::cout << "Wprowadz imie programisty: ";
 				std::cin >> name;
-				std::cout << "Cena zamawianego posi³ku: ";
+				std::cout << "Cena zamawianego posilku: ";
 				std::cin >> price;
 				std::cout << "Wplacona kwota: ";
 				std::cin >> in;
@@ -111,7 +180,7 @@ void newAccount() {
 				std::cin >> name;
 				std::cout << "Okres stazu: ";
 				std::cin >> period;
-				std::cout << "Cena zamawianego posi³ku: ";
+				std::cout << "Cena zamawianego posilku: ";
 				std::cin >> price;
 				std::cout << "Wplacona kwota: ";
 				std::cin >> in;

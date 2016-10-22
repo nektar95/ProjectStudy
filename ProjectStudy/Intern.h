@@ -7,7 +7,7 @@ class Intern :
 
 	public:
 		Intern(std::string name, double period);
-		void presentYourself();
+		std::string presentYourself();
 		inline int getIntershipPeriod() { return mIntershipPeriod; }
 
 };

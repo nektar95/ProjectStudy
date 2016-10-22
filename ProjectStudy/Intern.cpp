@@ -3,6 +3,6 @@
 
 Intern::Intern(std::string name, double period) : Employee(name), mIntershipPeriod(period) {}
 
-void Intern::presentYourself() {
-	std::cout << "Intern: " << getName() << std::endl;
+std::string Intern::presentYourself() {
+	return "Stazysta: " + getName() + "\nOkres stazu: " + std::to_string(getIntershipPeriod());
 }

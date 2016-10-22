@@ -32,7 +32,6 @@ void Account::withdrawMoney(double value) {
 }
 
 std::ostream& operator<< (std::ostream &out,  Account &account) {
-	account.getOwner()->presentYourself();
-	return out << "Balance: " << account.getBalance();
+	return out << account.getOwner()->presentYourself() << "Bilans: " << account.getBalance();
 }
 

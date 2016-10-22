@@ -5,6 +5,6 @@ class Programmer :
 {
 	public:
 		Programmer(std::string name);
-		void presentYourself();
+		std::string presentYourself();
 };
 

@@ -1,6 +1,7 @@
 #pragma once
 #include "ProgrammerAccount.h"
 #include <vector>
+#include <fstream>
 
 template <class T>
 class CashRegister{
@@ -8,7 +9,14 @@ class CashRegister{
 	T* currentAccount;
 	double mBalance;
 	void saveBalance() {
-		//save into file
+		std::ofstream outfile;
+		outfile.open("data.txt");
+
+		for (int i = 0; i < mListOfAccounts.size(); i++) {
+			outfile << *mListOfAccounts.at(i)<<"\n";
+		}
+
+		outfile.close();
 	}
 public:
 	double getBalance() {
@@ -45,6 +53,7 @@ public:
 		if (mBalance > value) {
 			mBalance -= value;
 			*currentAccount += value;
+			saveBalance();
 		}
 		else{
 			std::cout << "Nie ma takich pieniedzy w kasie!\n";
@@ -110,7 +119,6 @@ public:
 		for (int i = 0; i < cash.accountSize(); i++) {
 			delete mListOfAccounts.at(i);
 		}
-		mListOfAccounts.clear();
 	}
 };
 
